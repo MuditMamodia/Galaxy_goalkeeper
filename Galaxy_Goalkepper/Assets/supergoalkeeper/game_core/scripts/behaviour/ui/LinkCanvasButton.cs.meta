@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: e92b9ffae013942f794e7bf396149b80
+timeCreated: 1432554653
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/ui/LinkCanvasButton.cs
+  uploadId: 297462

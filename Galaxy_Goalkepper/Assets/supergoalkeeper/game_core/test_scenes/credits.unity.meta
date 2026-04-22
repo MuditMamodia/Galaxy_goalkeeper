@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 90eededd6861c45b88aa07cb4f3a9eb6
+timeCreated: 1437498701
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/test_scenes/credits.unity
+  uploadId: 297462

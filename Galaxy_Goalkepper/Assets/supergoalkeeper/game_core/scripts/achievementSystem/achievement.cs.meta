@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6ebfba6bbbbab45b0bbd07334a1da42e
+timeCreated: 1437722679
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/achievementSystem/achievement.cs
+  uploadId: 297462

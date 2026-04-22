@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 99602bca4e6de49f78190c52308d27e3
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/ui/PauseButton.cs
+  uploadId: 297462

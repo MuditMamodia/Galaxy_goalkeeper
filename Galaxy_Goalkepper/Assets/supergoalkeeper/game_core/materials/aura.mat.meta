@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a364f05615e644508a37e0b6f831c403
+timeCreated: 1442829407
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/materials/aura.mat
+  uploadId: 297462

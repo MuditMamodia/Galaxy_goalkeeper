@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: b2d93695ea4bf4cbda7cd35316bb91dc
+timeCreated: 1437674259
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/ScreenShakeBehaviour.cs
+  uploadId: 297462

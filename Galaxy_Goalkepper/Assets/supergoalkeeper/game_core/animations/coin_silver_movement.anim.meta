@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7a01c7fd63ca948a6ac5ccafb3b997ff
+timeCreated: 1442834272
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/coin_silver_movement.anim
+  uploadId: 297462

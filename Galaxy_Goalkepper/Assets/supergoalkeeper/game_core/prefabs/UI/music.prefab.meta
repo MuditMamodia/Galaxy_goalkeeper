@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a73a9b4df573341179001a76275ac16d
+timeCreated: 1437498089
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/UI/music.prefab
+  uploadId: 297462

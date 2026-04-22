@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1818f3a9cac3b497db5ddbf4f5860fa0
+timeCreated: 1437498655
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/UI/exit_button.prefab
+  uploadId: 297462

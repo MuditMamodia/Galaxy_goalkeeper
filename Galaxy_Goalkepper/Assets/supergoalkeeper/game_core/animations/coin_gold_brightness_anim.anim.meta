@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e78527609470a4a63a14efeb2bd20f67
+timeCreated: 1443045371
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/coin_gold_brightness_anim.anim
+  uploadId: 297462

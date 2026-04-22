@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7695dd413b98f44659ac9286f87f6ed0
+timeCreated: 1442826482
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/coin_bronze_1_4.controller
+  uploadId: 297462

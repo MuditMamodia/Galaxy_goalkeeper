@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 235b26752026f4e1a8188d7d32ec39e6
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/GameBehaviour.cs
+  uploadId: 297462

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: bc17574a563b04abc8781157bd9104ef
+timeCreated: 1435488324
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/SpawnerBehaviour.cs
+  uploadId: 297462

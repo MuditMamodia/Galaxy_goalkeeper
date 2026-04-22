@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fcd9d1d2f15a94a399ef7b8801948498
+timeCreated: 1442839228
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/hex_gold_movement.anim
+  uploadId: 297462

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 22cfff729c6914d978368ce631031fd6
+timeCreated: 1442826482
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/coin_bronze_movement.anim
+  uploadId: 297462

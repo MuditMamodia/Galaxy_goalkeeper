@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 553909854b3bf487998d07c0b49cc369
+timeCreated: 1443107054
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/button_backMenu.prefab
+  uploadId: 297462

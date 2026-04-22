@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a97239a1041634469a301a11e22ce6c0
+timeCreated: 1437475057
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/PauseAudioBehaviour.cs
+  uploadId: 297462

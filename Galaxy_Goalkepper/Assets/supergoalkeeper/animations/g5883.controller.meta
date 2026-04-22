@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 27aaad21d962a45828c1de830a4b0109
+timeCreated: 1444990633
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/animations/g5883.controller
+  uploadId: 297462

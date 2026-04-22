@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 05929711b98ca44d797e0a150b469e84
+timeCreated: 1442825671
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/hex_silver_1_4.controller
+  uploadId: 297462

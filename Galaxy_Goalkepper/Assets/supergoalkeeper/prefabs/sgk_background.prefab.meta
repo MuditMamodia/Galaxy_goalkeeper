@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: df8b8c0c5e32c4f838a89cd2cb25b112
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sgk_background.prefab
+  uploadId: 297462

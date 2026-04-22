@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d681248137ea4a36afc7b39da99c68c
+timeCreated: 1442833342
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/hex_bronze_movement.anim
+  uploadId: 297462

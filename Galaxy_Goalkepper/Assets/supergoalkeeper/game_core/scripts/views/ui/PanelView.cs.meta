@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f5912118eff264cef9dcba00b0b7a5f5
+timeCreated: 1437465004
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/views/ui/PanelView.cs
+  uploadId: 297462

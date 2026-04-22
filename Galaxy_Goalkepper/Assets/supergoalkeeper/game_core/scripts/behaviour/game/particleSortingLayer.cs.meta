@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b659c4edb7c6e446a86d71e1ba438b49
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/particleSortingLayer.cs
+  uploadId: 297462

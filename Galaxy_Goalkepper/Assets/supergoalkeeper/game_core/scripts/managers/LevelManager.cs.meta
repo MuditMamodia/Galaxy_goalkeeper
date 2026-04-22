@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 851d82cee8b0444bb96bec3e7b1a8822
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/managers/LevelManager.cs
+  uploadId: 297462

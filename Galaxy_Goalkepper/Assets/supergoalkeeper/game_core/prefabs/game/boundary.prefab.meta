@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 80f769c6a8b4b4101b74609d884f2cb8
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/game/boundary.prefab
+  uploadId: 297462

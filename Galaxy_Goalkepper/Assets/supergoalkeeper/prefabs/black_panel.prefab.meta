@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e11a9f7578161410d8127b3f33152a47
+timeCreated: 1443089180
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/black_panel.prefab
+  uploadId: 297462

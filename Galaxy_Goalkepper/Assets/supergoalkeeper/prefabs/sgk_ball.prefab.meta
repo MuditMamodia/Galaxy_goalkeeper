@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 60603daf84d4a4704bf9c473ad5c6451
+timeCreated: 1433319102
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sgk_ball.prefab
+  uploadId: 297462

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6226560534e594501ae59b9215af0cc7
+timeCreated: 1437499205
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/test_scenes/ranking.unity
+  uploadId: 297462

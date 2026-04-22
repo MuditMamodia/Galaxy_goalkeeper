@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b288ce223c9894429b98f1d43b401a88
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/managers/TimeManager.cs
+  uploadId: 297462

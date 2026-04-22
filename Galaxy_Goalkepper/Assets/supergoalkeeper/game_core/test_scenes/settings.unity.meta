@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8333cc2fcf0f6479e93af53dff2e035d
+timeCreated: 1437498907
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/test_scenes/settings.unity
+  uploadId: 297462

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3bb2ae611923e40d9b4ee18e5f0860d7
+timeCreated: 1442834272
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/coin_silver_1_5.controller
+  uploadId: 297462

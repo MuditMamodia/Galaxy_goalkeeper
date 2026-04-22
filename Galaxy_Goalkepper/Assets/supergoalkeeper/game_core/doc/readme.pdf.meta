@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6412ca90bb6ce4066be185dc332947f5
+timeCreated: 1438329970
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/doc/readme.pdf
+  uploadId: 297462

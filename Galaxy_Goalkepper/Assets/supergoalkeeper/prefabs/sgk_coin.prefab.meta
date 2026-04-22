@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1f622e75b3f4d44c582479e5c9aa337e
+timeCreated: 1433314755
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sgk_coin.prefab
+  uploadId: 297462

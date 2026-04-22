@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 16728543b60d4482f8954f060d8ed090
+timeCreated: 1432544074
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/ui/legalBehaviour.cs
+  uploadId: 297462

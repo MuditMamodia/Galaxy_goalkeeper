@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53bb2e627bf594fec8b209c78c642cca
+timeCreated: 1442839229
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/hex_gold.controller
+  uploadId: 297462

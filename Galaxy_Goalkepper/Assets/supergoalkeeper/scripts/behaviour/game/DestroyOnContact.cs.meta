@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 3eaef390b62b94a688373aa9f6e57f43
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/scripts/behaviour/game/DestroyOnContact.cs
+  uploadId: 297462

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f7f7b697334e84760bd5714bce1b6c46
+timeCreated: 1443712781
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/animations/glove_animation.anim
+  uploadId: 297462

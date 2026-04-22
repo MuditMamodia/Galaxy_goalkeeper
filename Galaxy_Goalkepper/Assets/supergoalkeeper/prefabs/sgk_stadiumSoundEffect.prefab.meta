@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 066d39d1cfc354da391a3dce94a3d7dc
+NativeFormatImporter:
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sgk_stadiumSoundEffect.prefab
+  uploadId: 297462

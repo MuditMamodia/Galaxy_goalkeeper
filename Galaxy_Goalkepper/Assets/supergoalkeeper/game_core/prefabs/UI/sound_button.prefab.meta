@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5532c08ec0c7a4ba6b637052b60741fd
+timeCreated: 1437480099
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/UI/sound_button.prefab
+  uploadId: 297462

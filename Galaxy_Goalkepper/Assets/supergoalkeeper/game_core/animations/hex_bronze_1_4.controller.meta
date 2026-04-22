@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2f24ea798eaaf45a098f1bd90806d598
+timeCreated: 1442833343
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/hex_bronze_1_4.controller
+  uploadId: 297462

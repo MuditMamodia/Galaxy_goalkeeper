@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: f45efd917ed192643b931e80798631bf
+timeCreated: 1532529924
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/scripts/shop/ShopController.cs
+  uploadId: 297462

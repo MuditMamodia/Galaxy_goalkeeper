@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 43e243dde83b84dc4bc0eeb575ad4a14
+timeCreated: 1443108515
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/settings.prefab
+  uploadId: 297462

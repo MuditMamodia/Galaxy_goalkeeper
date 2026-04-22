@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a223ab9162c15495a8313be90a2c5a9d
+timeCreated: 1442829335
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/game/aura.prefab
+  uploadId: 297462

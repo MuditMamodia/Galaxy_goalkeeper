@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e9d8a79f8ff224c0d930d8fc634b6aa5
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/loadingScreen.cs
+  uploadId: 297462

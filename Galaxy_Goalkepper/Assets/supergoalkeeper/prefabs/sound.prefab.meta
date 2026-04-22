@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a4686f3da5ef448ab93db7e5317d9c85
+timeCreated: 1443102691
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sound.prefab
+  uploadId: 297462

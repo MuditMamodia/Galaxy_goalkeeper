@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 314fdab81e2394abd85e215edaef12d8
+timeCreated: 1447069923
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/prefabs/sgk_player_6.prefab
+  uploadId: 297462

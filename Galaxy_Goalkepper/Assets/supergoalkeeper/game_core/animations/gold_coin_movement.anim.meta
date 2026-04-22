@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f67e10a9f1e3940839c0b6a1f71798e0
+timeCreated: 1442824475
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/animations/gold_coin_movement.anim
+  uploadId: 297462

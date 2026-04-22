@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 2c1e67a77341049ec8f2e7e66d8b936e
+AudioImporter:
+  serializedVersion: 4
+  format: -1
+  quality: .5
+  stream: 1
+  3D: 0
+  forceToMono: 0
+  useHardware: 0
+  loopable: 0
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/music/main_theme.wav
+  uploadId: 297462

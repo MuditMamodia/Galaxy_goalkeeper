@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bf1dd81ff1bb945d39caa5dac4275090
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/behaviour/game/objectFade.cs
+  uploadId: 297462

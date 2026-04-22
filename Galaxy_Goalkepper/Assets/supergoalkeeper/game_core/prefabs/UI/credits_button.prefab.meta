@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4566785ef368d45079035ab5f6940c59
+timeCreated: 1437585398
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/UI/credits_button.prefab
+  uploadId: 297462

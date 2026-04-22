@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3c3ae66f084754d9495f75e2c5eaecef
+timeCreated: 1437579893
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/prefabs/UI/gameOverMenu.prefab
+  uploadId: 297462

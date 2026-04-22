@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: f4a60cbbd99b343089b6240db6d1d4fb
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/scripts/behaviour/game/PlayerController.cs
+  uploadId: 297462

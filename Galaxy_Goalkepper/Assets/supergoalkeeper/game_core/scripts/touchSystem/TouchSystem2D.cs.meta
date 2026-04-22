@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c7d7c974e29ac4bacb71318b4c8dcdeb
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 18290
+  packageName: SuperGoalKeeper
+  packageVersion: 2.0.2
+  assetPath: Assets/supergoalkeeper/game_core/scripts/touchSystem/TouchSystem2D.cs
+  uploadId: 297462
