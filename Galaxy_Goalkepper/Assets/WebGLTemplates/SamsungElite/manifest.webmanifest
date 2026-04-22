@@ -1,0 +1,15 @@
+{
+    "name": "{{{ PRODUCT_NAME }}}",
+    "short_name": "{{{ PRODUCT_NAME }}}",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "background_color": "#FFFFFF",
+    "theme_color": "#0066B3",
+    "description": "{{{ PRODUCT_NAME }}}",
+    "icons": [{
+      "src": "TemplateData/samsung_elite_logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }]
+  }

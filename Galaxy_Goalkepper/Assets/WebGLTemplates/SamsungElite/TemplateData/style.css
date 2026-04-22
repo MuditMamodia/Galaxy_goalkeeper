@@ -1,0 +1,8 @@
+body { padding: 0; margin: 0; background: #FFFFFF; }
+#unity-container { position: fixed; width: 100%; height: 100%; background: #FFFFFF; }
+#unity-canvas { width: 100%; height: 100%; background: #FFFFFF; }
+#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
+#unity-logo { width: 200px; height: 200px; background: url('samsung_elite_logo.jpg') no-repeat center; background-size: contain; }
+#unity-progress-bar-empty { margin-left: auto; margin-right: auto; width: 180px; height: 12px; margin-top: 20px; background: #E8E8E8; border-radius: 6px; }
+#unity-progress-bar-full { width: 0%; height: 12px; background: linear-gradient(90deg, #00B4DB, #0066B3); border-radius: 6px; }
+#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }

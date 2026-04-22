@@ -1,0 +1,15 @@
+{
+    "name": "{{{ PRODUCT_NAME }}}",
+    "short_name": "{{{ PRODUCT_NAME }}}",
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "background_color": "#231F20",
+    "theme_color": "#000",
+    "description": "{{{ PRODUCT_NAME }}}",
+    "icons": [{
+      "src": "TemplateData/meta_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }]
+  }
