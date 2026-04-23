@@ -22,8 +22,15 @@ public class VideoController : MonoBehaviour
 
     private void Start()
     {
-        Play_video(0);
+       
     }
+
+    private void OnEnable()
+    {
+        Play_video(0);
+        exit_tab_text.SetActive(false);
+    }
+
 
 
     internal void Play_video(int p_index)
@@ -113,10 +120,15 @@ public class VideoController : MonoBehaviour
         //Survivor._S._Video_page_buttons[0].gameObject.SetActive(false);  // disable skip button
 
         //mudit adding start here ---------------------------------
-        if (can_show_exit_tab_text)
-        {
-            exit_tab_text.SetActive(true);
-        }
+        //mudit adding start here ---------------------------------
+        Debug.Log("Video Ended!");
+        exit_tab_text.SetActive(true);
+
+        //if (can_show_exit_tab_text)
+        //{
+        //    Debug.Log("Showing exit text");
+
+        //}
         // and ends here --------------------------
 
         Stop_video();
