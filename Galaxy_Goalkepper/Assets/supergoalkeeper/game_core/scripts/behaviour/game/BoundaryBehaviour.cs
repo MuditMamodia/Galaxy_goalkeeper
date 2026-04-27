@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace game_core{
 	/// <summary>
@@ -7,21 +6,41 @@ namespace game_core{
 	/// when a gameObject leaves from game zone.
 	/// </summary>
 	public class BoundaryBehaviour : MonoBehaviour {
-		public bool destroy=true;
+		//public bool destroy=true;
 
-		/// <summary>
-		/// When objects leave from game zone are removed/disabled.
-		/// </summary>
-		/// <param name="other">Other.</param>
-		void OnTriggerExit2D(Collider2D other)
-		{
-			if (destroy) 
-			{
-					Destroy (other.gameObject);
-			} else {
-					other.gameObject.SetActive (false);
-			}
-		}
-	}
+        /// <summary>
+        /// When objects leave from game zone are removed/disabled.
+        /// </summary>
+        /// <param name="other">Other.</param>
+        //void OnTriggerExit2D(Collider2D other)
+        //{
+        //	if (other.gameObject.CompareTag("balls"))
+        //	{
+        //              if (destroy)
+        //              {
+        //                  Destroy(other.gameObject);
+        //              }
+        //              else
+        //              {
+        //                  other.gameObject.SetActive(false);
+        //              }
+        //          }
+
+        //}
+
+        void OnTriggerExit2D(Collider2D other)
+        {
+           
+
+            if (!other.CompareTag("balls"))
+                return;
+
+            supergoalkeeper.Mover mover = other.GetComponent<supergoalkeeper.Mover>();
+            if (mover != null)
+            {
+                mover.RespawnBall();
+            }
+        }
+    }
 
 }

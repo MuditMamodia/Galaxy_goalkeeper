@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 public class postBehaviour : MonoBehaviour {
 	
@@ -9,7 +9,7 @@ public class postBehaviour : MonoBehaviour {
 	{
         if (other.name.Contains("sgk_ball"))
         {
-			GetComponent<AudioSource>().Play ();
+			//GetComponent<AudioSource>().Play ();
 		}
 	}
 }

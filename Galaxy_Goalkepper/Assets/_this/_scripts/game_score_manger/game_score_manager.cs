@@ -1,4 +1,5 @@
 ﻿using supergoalkeeper;
+using TMPro;
 using UnityEngine;
 
 public class game_score_manager : MonoBehaviour
@@ -8,23 +9,41 @@ public class game_score_manager : MonoBehaviour
     public goalController goalController;
     public MissionOne missionOne;   // reference to check gameOver
 
-    private bool hasPrinted = false; // prevent multiple logs
+    
+
+
+    public TextMeshProUGUI saved_representer;
+    public TextMeshProUGUI not_saved_representer;
+
+    private bool hasPrinted = false;
+    private int lastSaved = -1;
+    private int lastMissed = -1;
+
 
     void Start()
     {
-     
+
         // 🔹 Auto find MissionOne if not assigned
         if (missionOne == null)
         {
             missionOne = FindObjectOfType<MissionOne>();
         }
+
+        if (missionOne != null)
+        {
+            if (playerController == null && missionOne.player != null)
+                playerController = missionOne.player.ComponentBehaviour;
+
+            if (goalController == null)
+                goalController = missionOne.goalCtrl;
+        }
     }
 
     void Update()
     {
-        if (missionOne == null) return;
+        if (missionOne == null)
+            return;
 
-        // 🔥 Get references AFTER player is spawned
         if (playerController == null && missionOne.player != null)
         {
             playerController = missionOne.player.ComponentBehaviour;
@@ -32,8 +51,10 @@ public class game_score_manager : MonoBehaviour
 
         if (goalController == null)
         {
-            goalController = FindObjectOfType<goalController>();
+            goalController = missionOne.goalCtrl;
         }
+
+        UpdateUI();
 
         if (missionOne.gameOver && !hasPrinted)
         {
@@ -47,28 +68,25 @@ public class game_score_manager : MonoBehaviour
         }
     }
 
-    // 🔹 Get saved balls
     public int GetSavedBalls()
     {
         if (playerController == null) return 0;
         return playerController.totalCollectedObjects;
     }
 
-    // 🔹 Get missed goals
     public int GetMissedGoals()
     {
         if (goalController == null) return 0;
         return goalController.goals;
     }
 
-    // 🔹 Reset stats
     public void ResetStats()
     {
         if (playerController != null)
         {
             playerController.collectedObjects = 0;
             playerController.totalCollectedObjects = 0;
-            playerController.coins = 0;
+            //playerController.coins = 0;
         }
 
         if (goalController != null)
@@ -76,8 +94,26 @@ public class game_score_manager : MonoBehaviour
             goalController.goals = 0;
         }
 
-        hasPrinted = false; // allow printing again next round
+        hasPrinted = false;
+        lastSaved = -1;
+        lastMissed = -1;
+    }
 
-        Debug.Log("Stats Reset!");
+    void UpdateUI()
+    {
+        int saved = GetSavedBalls();
+        int missed = GetMissedGoals();
+
+        if (saved != lastSaved && saved_representer != null)
+        {
+            saved_representer.text = "Saved:- " + saved;
+            lastSaved = saved;
+        }
+
+        if (missed != lastMissed && not_saved_representer != null)
+        {
+            not_saved_representer.text = "Not Saved:- " + missed;
+            lastMissed = missed;
+        }
     }
 }

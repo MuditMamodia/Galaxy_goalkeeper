@@ -10,10 +10,11 @@ namespace supergoalkeeper
 
         public SpawnofBalls spawnSettings;
         public bool gameStarted = false;
-        private bool finishedSpawning = false;
+        public bool finishedSpawning = false;
+        private Coroutine spawnCoroutine;
+        public Transform[] spawnPoints;
 
-
-
+        public goalController goalCtrl;
 
         /// <summary>
         /// VARIABLES.
@@ -35,8 +36,8 @@ namespace supergoalkeeper
         public GameObject grass;
 
         //GAMEOBJECTS
-        public GameObject coin;
-        public GameObject[] coinPool;
+        //public GameObject coin;
+        //public GameObject[] coinPool;
 
         //GOAL
         public GoalModel goal;
@@ -54,7 +55,7 @@ namespace supergoalkeeper
         public float seconds = 2.0f;
         public float penaltyTime = 1.0f;
         public int balls4Cash = 4;
-        public int spawnNCoins = 2;
+        //public int spawnNCoins = 2;
         //SPAWNER TIME RANGE
         public Vector2 timeRange = new Vector2(1.0f, 2.0f);
 
@@ -64,10 +65,10 @@ namespace supergoalkeeper
 
 
         //GAME CONTROL VARIABLES
-        private int oldCollectedObjects = 0;
-        private int oldScoredGoals = 0;
-        private bool missionEnd = false;
-        private int oldCoins = 0;
+        //private int oldCollectedObjects = 0;
+        //private int oldScoredGoals = 0;
+        //private bool missionEnd = false;
+        //private int oldCoins = 0;
         //GAME INDICATORS
         //private TextView iLevel;
         //private TextView iCrono;
@@ -98,7 +99,7 @@ namespace supergoalkeeper
         /// </summary>
         void Start()
         {
-            volume = SettingsManager.sound;
+            //volume = SettingsManager.sound;
             goal = new GoalModel("sgk_goal");
             //iLevel = new TextView("level");
             //iCrono = new TextView("crono");
@@ -150,7 +151,12 @@ namespace supergoalkeeper
             //START GAME
             if (objectGame.Length > 0)
             {
-                StartCoroutine(Spawn());
+                if (spawnCoroutine != null)
+                {
+                    StopCoroutine(spawnCoroutine);
+                }
+
+                spawnCoroutine = StartCoroutine(Spawn());
             }
 
         }
@@ -163,22 +169,40 @@ namespace supergoalkeeper
             if (objectGame != null)
             {
                 objectGamePool = new GameObject[objectGame.Length];
+
                 for (int i = 0; i < objectGame.Length; i++)
                 {
                     objectGamePool[i] = Instantiate(objectGame[i]) as GameObject;
                     objectGamePool[i].SetActive(false);
+
+                    // Cache MissionOne reference in every ball once
+                    Mover mover = objectGamePool[i].GetComponent<Mover>();
+                    if (mover != null)
+                    {
+                        mover.missionOne = this;
+                    }
                 }
             }
-            if (coin != null)
-            {
-                coinPool = new GameObject[spawnNCoins];
-                for (int i = 0; i < this.spawnNCoins; i++)
-                {
-                    coinPool[i] = Instantiate(this.coin) as GameObject;
-                    coinPool[i].SetActive(false);
-                }
-            }
+
+            //if (coin != null)
+            //{
+            //    coinPool = new GameObject[spawnNCoins];
+            //    for (int i = 0; i < spawnNCoins; i++)
+            //    {
+            //        coinPool[i] = Instantiate(coin) as GameObject;
+            //        coinPool[i].SetActive(false);
+            //    }
+            //}
         }
+
+        public Transform GetRandomSpawnPoint()
+        {
+            if (spawnPoints == null || spawnPoints.Length == 0)
+                return null;
+
+            return spawnPoints[Random.Range(0, spawnPoints.Length)];
+        }
+
 
         /// <summary>
         /// Activates the object.
@@ -202,17 +226,17 @@ namespace supergoalkeeper
         /// <summary>
         /// Activates the object.
         /// </summary>
-        public GameObject activateCoin()
-        {
-            for (int i = 0; i < coinPool.Length; i++)
-            {
-                if (!coinPool[i].activeSelf)
-                {
-                    return coinPool[i];
-                }
-            }
-            return null;
-        }
+        //public GameObject activateCoin()
+        //{
+        //    for (int i = 0; i < coinPool.Length; i++)
+        //    {
+        //        if (!coinPool[i].activeSelf)
+        //        {
+        //            return coinPool[i];
+        //        }
+        //    }
+        //    return null;
+        //}
         /// <summary>
         /// Update this instance.
         /// </summary>
@@ -220,24 +244,26 @@ namespace supergoalkeeper
         {
             if (!gameStarted || gameOver) return;
 
-            if (finishedSpawning && AreAllBallsGone())
+            int totalHandled = player.ComponentBehaviour.totalCollectedObjects + goalCtrl.goals;
+
+            if (finishedSpawning && totalHandled >= spawnSettings.totalBallsToSpawn)
             {
                 gameOver = true;
-                Debug.Log("GAME OVER: All balls finished!");
+                Debug.Log("GAME OVER: All balls handled!");
             }
-            if (!missionEnd)
-            {
-                if (!gameOver)
-                {
+            //if (!missionEnd)
+            //{
+            //    if (!gameOver)
+            //    {
 
-                    //updateTimers();
-                    //calculateLevel();
-                    updateUI();
-                }
-                //	else {
-                //	//this.GameOver();
-                //}
-            }
+            //        //updateTimers();
+            //        //calculateLevel();
+            //        //updateUI();
+            //    }
+            //    //	else {
+            //    //	//this.GameOver();
+            //    //}
+            //}
 
         }
 
@@ -388,38 +414,50 @@ namespace supergoalkeeper
 
             while (!gameOver && spawnedCount < spawnSettings.totalBallsToSpawn)
             {
-                GameObject obj = activateObject(Random.Range(0, objectGamePool.Length));
-
-                // 🛑 If pool is full, retry next frame
-                if (obj == null)
+                int activeBalls = 0;
+                for (int i = 0; i < objectGamePool.Length; i++)
                 {
-                    yield return null;
+                    if (objectGamePool[i].activeSelf)
+                        activeBalls++;
+                }
+
+                if (activeBalls >= 3) // 👈 LIMIT (you can tweak this)
+                {
+                    yield return new WaitForSeconds(0.2f);
                     continue;
                 }
 
-                // 📍 Calculate spawn position
-                Vector3 upperCorner = new Vector3(Screen.width, Screen.height, 0.0f);
-                Vector3 targetWidth = cam.ScreenToWorldPoint(upperCorner);
+                //   spawn safelyyyyyyyy
+                GameObject obj = activateObject(Random.Range(0, objectGamePool.Length));
 
-                float objectWidth = obj.GetComponent<Renderer>().bounds.extents.x;
-                float maxWidth = targetWidth.x - objectWidth;
+                if (obj == null)
+                {
+                    yield return new WaitForSeconds(0.05f);
+                    continue;
+                }
 
-                Vector3 spawnPosition = new Vector3(
-                    Random.Range(-maxWidth, maxWidth),
-                    transform.position.y,
-                    0.0f
-                );
+                // spawn point checked
+                if (spawnPoints == null || spawnPoints.Length == 0)
+                {
+                    Debug.LogError("No spawn points assigned!");
+                    yield break;
+                }
 
-                // 🚀 Spawn ball
-                obj.transform.position = spawnPosition;
+                Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
+                obj.transform.position = spawnPoint.position;
                 obj.transform.rotation = Quaternion.identity;
                 obj.SetActive(true);
 
                 spawnedCount++;
 
-                // ⏱ Delay before next ball
                 yield return new WaitForSeconds(spawnSettings.spawnDelay);
             }
+
+            // All the balls are spawned
+
+            Debug.Log("Finished Spawning All Balls");
+
 
             // ✅ All balls spawned
             finishedSpawning = true;
@@ -481,11 +519,11 @@ namespace supergoalkeeper
         /// Gets or sets the volume.
         /// </summary>
         /// <value>The volume.</value>
-        private float volume
-        {
-            get { return AudioListener.volume; }
-            set { AudioListener.volume = value; }
-        }
+        //private float volume
+        //{
+        //    //get { return AudioListener.volume; }
+        //    //set { AudioListener.volume = value; }
+        //}
 
 
 
@@ -502,6 +540,42 @@ namespace supergoalkeeper
                 }
             }
             return true; // no balls left
+        }
+
+        public void ResetGame()
+        {
+            gameOver = false;
+            gameStarted = false;
+            finishedSpawning = false;
+
+            // reset player
+            if (player != null && player.ComponentBehaviour != null)
+            {
+                player.ComponentBehaviour.collectedObjects = 0;
+                player.ComponentBehaviour.totalCollectedObjects = 0;
+                //player.ComponentBehaviour.coins = 0;
+            }
+
+            // reset goal
+            
+            if (goalCtrl != null)
+            {
+                goalCtrl.goals = 0;
+            }
+
+            // deactivate balls
+            for (int i = 0; i < objectGamePool.Length; i++)
+            {
+                objectGamePool[i].SetActive(false);
+            }
+
+            // 🔥 restart coroutine properly
+            if (spawnCoroutine != null)
+            {
+                StopCoroutine(spawnCoroutine);
+            }
+
+            spawnCoroutine = StartCoroutine(Spawn());
         }
 
     }

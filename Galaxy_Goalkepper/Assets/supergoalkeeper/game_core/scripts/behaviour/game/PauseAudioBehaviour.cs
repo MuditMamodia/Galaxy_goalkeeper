@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 namespace game_core{
 /// <summary>
 /// Music behaviour on game pause.
@@ -12,7 +12,7 @@ public class PauseAudioBehaviour : MonoBehaviour {
 	/// Use this for initialization.
 	/// </summary>
 	void Start () {
-		_aSource=GetComponent<AudioSource>();
+		//_aSource=GetComponent<AudioSource>();
 	}
 	
 	//
@@ -21,15 +21,15 @@ public class PauseAudioBehaviour : MonoBehaviour {
 	/// </summary>
 	void Update () {
 
-		if (TimeManager.isPaused) 
-		{
-			_aSource.Pause();
-		} else {
-			if(!_aSource.isPlaying)
-			{
-				_aSource.UnPause();		
-			}
-		}
+		//if (TimeManager.isPaused) 
+		//{
+		//	_aSource.Pause();
+		//} else {
+		//	if(!_aSource.isPlaying)
+		//	{
+		//		_aSource.UnPause();		
+		//	}
+		//}
 	
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 namespace game_core{
 
 /// <summary>

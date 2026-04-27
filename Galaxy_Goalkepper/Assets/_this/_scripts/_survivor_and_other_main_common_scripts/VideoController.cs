@@ -27,7 +27,7 @@ public class VideoController : MonoBehaviour
 
     private void OnEnable()
     {
-        Play_video(0);
+        //Play_video(0);
         exit_tab_text.SetActive(false);
     }
 

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 namespace supergoalkeeper{
 	public class DestroyOnContact : MonoBehaviour {

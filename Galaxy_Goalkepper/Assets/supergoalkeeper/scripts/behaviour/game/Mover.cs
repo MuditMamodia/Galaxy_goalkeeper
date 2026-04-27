@@ -1,79 +1,84 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 
 namespace supergoalkeeper
 {
-
+    [RequireComponent(typeof(Rigidbody2D))]
     public class Mover : MonoBehaviour
     {
 
 
+        public float speed = 8f;
+        public float curveStrength = 2f;
+        public float spin = 2f;
 
+        [HideInInspector] public MissionOne missionOne;
 
-        //FORCE OF  BALL
-        private float forceBall;
+        private Rigidbody2D rb;
+        private Transform goal;
 
-        //MAIN CAMERA
-        public Camera cam;
+        void Awake()
+        {
+            rb = GetComponent<Rigidbody2D>();
+        }
 
-        //TIME TO START THE BALL EFFECT
-        // Default Config. Vector2(0,0)
-        public Vector2 startWait;
-
-        //DURATION OF BALL CURVE
-        //by default Vector2(0.5,0.65)
-        public Vector2 ballCurveTime;
-
-        //DURATION OF REVERSE BALL CURVE
-        //by default Vector2(1,1)
-        public Vector2 ballCurveWait;
-
-        //BALL TORQUE
-        //by default spin=0.5f
-        public float spin = 0f;
-
-        //START/END FORCE
-        //by default startForce=10; endForce=20;
-        public float startForce = 0.0f;
-        public float endForce = 5.0f;
-
-        //START
         void Start()
         {
-            if (!cam) { this.cam = Camera.main; }
+            CacheGoal();
         }
 
-        /// <summary>
-        /// Raises the enable event.
-        /// </summary>
         void OnEnable()
         {
-            StartCoroutine(Parabola());
+            if (rb == null)
+                rb = GetComponent<Rigidbody2D>();
 
+            if (goal == null)
+                CacheGoal();
+
+            LaunchFromCurrentPosition();
         }
 
-        //THE BALL DESCRIBES A PARABOLA
-        IEnumerator Parabola()
+        private void CacheGoal()
         {
-            yield return new WaitForSeconds(Random.Range(startWait.x, startWait.y));
-            forceBall = Random.Range(startForce, endForce) * -Mathf.Sign(transform.position.x);
-            yield return new WaitForSeconds(Random.Range(ballCurveTime.x, ballCurveTime.y));
-            forceBall = -forceBall;
-            yield return new WaitForSeconds(Random.Range(ballCurveWait.x, ballCurveWait.y));
-            forceBall = 0;
+            GameObject goalObj = GameObject.FindGameObjectWithTag("Goal");
+            if (goalObj != null)
+            {
+                goal = goalObj.transform;
+            }
         }
 
-        /**
-         * THE BALL SPINS.
-         * THE BALL DESCRIBES A PARABOLA.
-         * */
-        void FixedUpdate()
+        private void LaunchFromCurrentPosition()
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(forceBall, 0.0f));
-            GetComponent<Rigidbody2D>().AddTorque(spin);
+            if (goal == null || rb == null)
+                return;
+
+            Vector2 direction = (goal.position - transform.position).normalized;
+
+            float curveDirection = Random.value < 0.5f ? -1f : 1f;
+            Vector2 perpendicular = new Vector2(-direction.y, direction.x);
+            Vector2 curve = perpendicular * curveDirection * curveStrength;
+
+            Vector2 finalVelocity = (direction + curve).normalized * speed;
+
+            rb.linearVelocity = finalVelocity;
+            rb.angularVelocity = spin * curveDirection;
         }
 
+        public void RespawnBall()
+        {
+            if (missionOne == null)
+                return;
 
+            Transform spawnPoint = missionOne.GetRandomSpawnPoint();
+            if (spawnPoint == null)
+                return;
+
+            transform.position = spawnPoint.position;
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
+
+            LaunchFromCurrentPosition();
+        }
     }
 
 }
