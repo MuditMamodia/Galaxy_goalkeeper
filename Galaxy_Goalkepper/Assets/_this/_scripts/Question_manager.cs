@@ -21,10 +21,18 @@ public class Question_manager : MonoBehaviour
 
     [Header("UI")]
     public TextMeshProUGUI question_txt;
-    public TextMeshProUGUI why_correct_txt;
+    public TextMeshProUGUI[] why_correct_txt;
 
     [Header("Buttons")]
     public Button[] answerButtons;
+
+    [Header("Answer Selection Modes")]
+    [Tooltip("If true, dragging the Answer_ball onto an option selects it.")]
+    public bool enableDragBallToOption = true;
+    [Tooltip("If true, clicking/tapping an option directly selects it.")]
+    public bool enableDirectClick = false;
+    [Tooltip("Optional. If left empty, will search the scene for a GameObject named 'Answer_ball'.")]
+    public DraggableBall answerBall;
 
     private MCQ currentQuestion;
     private string correctAnswer;
@@ -102,19 +110,38 @@ public class Question_manager : MonoBehaviour
         // Assign to buttons
         for (int i = 0; i < answerButtons.Length; i++)
         {
-            TextMeshProUGUI txt = answerButtons[i].GetComponentInChildren<TextMeshProUGUI>();
+            Button btn = answerButtons[i];
+
+            TextMeshProUGUI txt = btn.GetComponentInChildren<TextMeshProUGUI>();
             txt.text = allAnswers[i];
 
             string selectedAnswer = allAnswers[i];
 
-            answerButtons[i].onClick.RemoveAllListeners();
-            answerButtons[i].onClick.AddListener(() =>
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() =>
             {
                 OnAnswerClicked(selectedAnswer);
             });
+
+            btn.interactable = enableDirectClick;
+            ColorBlock colors = btn.colors;
+            colors.disabledColor = colors.normalColor;
+            btn.colors = colors;
         }
 
-        why_correct_txt.text = "";
+        ApplyAnswerModeToBall();
+
+        //why_correct_txt.text = "";
+    }
+
+    private void ApplyAnswerModeToBall()
+    {
+        if (answerBall == null)
+        {
+            GameObject go = GameObject.Find("Answer_ball");
+            if (go != null) answerBall = go.GetComponent<DraggableBall>();
+        }
+        if (answerBall != null) answerBall.enabled = enableDragBallToOption;
     }
 
     // 🔥 HANDLE CLICK
@@ -122,7 +149,7 @@ public class Question_manager : MonoBehaviour
     {
         if (selectedAnswer == correctAnswer)
         {
-            //Survivor._S.play_audio_by_index(4);
+            Survivor._S.play_audio_by_index(3);
             Debug.Log("✅ Correct Answer!");
             //lcs.opeing_correct_answer_page();
             game_flow_loop.gamflow.correctanspage();
@@ -131,13 +158,17 @@ public class Question_manager : MonoBehaviour
         }
         else
         {
-            //Survivor._S.play_audio_by_index(5);
+            Survivor._S.play_audio_by_index(4);
             Debug.Log("❌ Wrong Answer!");
 
             //lcs.incorrect_page_opening();
             game_flow_loop.gamflow.wrong_option_page_opener();
         }
 
-        why_correct_txt.text = currentQuestion.whyCorrect;
+        
+        foreach (var whycorrect in why_correct_txt)
+        {
+            whycorrect.text = currentQuestion.whyCorrect;
+        }
     }
 }

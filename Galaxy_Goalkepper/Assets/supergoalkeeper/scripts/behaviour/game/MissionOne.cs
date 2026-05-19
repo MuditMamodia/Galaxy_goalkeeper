@@ -250,6 +250,7 @@ namespace supergoalkeeper
             {
                 gameOver = true;
                 Debug.Log("GAME OVER: All balls handled!");
+                game_flow_loop.gamflow.addingplay++;
             }
             //if (!missionEnd)
             //{
@@ -557,25 +558,46 @@ namespace supergoalkeeper
             }
 
             // reset goal
-            
+
             if (goalCtrl != null)
             {
                 goalCtrl.goals = 0;
             }
 
             // deactivate balls
-            for (int i = 0; i < objectGamePool.Length; i++)
+            if (objectGamePool != null)
             {
-                objectGamePool[i].SetActive(false);
+                for (int i = 0; i < objectGamePool.Length; i++)
+                {
+                    if (objectGamePool[i] != null)
+                        objectGamePool[i].SetActive(false);
+                }
             }
 
             // 🔥 restart coroutine properly
             if (spawnCoroutine != null)
             {
                 StopCoroutine(spawnCoroutine);
+                spawnCoroutine = null;
             }
 
-            spawnCoroutine = StartCoroutine(Spawn());
+            if (isActiveAndEnabled && objectGamePool != null && objectGamePool.Length > 0)
+            {
+                spawnCoroutine = StartCoroutine(Spawn());
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (objectGamePool != null && objectGamePool.Length > 0 && spawnCoroutine == null)
+            {
+                spawnCoroutine = StartCoroutine(Spawn());
+            }
+        }
+
+        private void OnDisable()
+        {
+            spawnCoroutine = null;
         }
 
     }

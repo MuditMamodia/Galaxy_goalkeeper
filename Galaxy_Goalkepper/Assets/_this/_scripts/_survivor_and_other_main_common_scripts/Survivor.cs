@@ -130,7 +130,7 @@ public class Survivor : MonoBehaviour
         {
             _S = this;
 
-            StartCoroutine(AutoMuteUnmute());
+            //StartCoroutine(AutoMuteUnmute());
 
             // DontDestroyOnLoad only works on ROOT GameObjects
             // Find the topmost parent and persist that instead
@@ -209,7 +209,14 @@ public class Survivor : MonoBehaviour
         if (!canplay) return;
         AudioSource source = _Audio_sources[index];
         source.PlayOneShot(source.clip);
-    
+
+    }
+
+    public void stop_audio_by_index(int index)
+    {
+        if (_Audio_sources == null || index < 0 || index >= _Audio_sources.Count) return;
+        AudioSource source = _Audio_sources[index];
+        if (source != null) source.Stop();
     }
 
     void ApplySoundState()
@@ -371,23 +378,23 @@ public class Survivor : MonoBehaviour
         }
     }
 
-    IEnumerator AutoMuteUnmute()
-    {
-        yield return new WaitForSeconds(0.2f);
+    //IEnumerator AutoMuteUnmute()
+    //{
+    //    yield return new WaitForSeconds(0.2f);
 
-        // Mute
-        _is_muted = true;
-        ApplySoundState();
-        UpdateSoundButtonSprites();
-        Debug.Log("Auto Muted");
+    //    // Mute
+    //    _is_muted = true;
+    //    ApplySoundState();
+    //    UpdateSoundButtonSprites();
+    //    Debug.Log("Auto Muted");
 
-        yield return new WaitForSeconds(0.8f);
+    //    yield return new WaitForSeconds(0.8f);
 
-        // Unmute
-        _is_muted = false;
-        ApplySoundState();
-        UpdateSoundButtonSprites();
-        Debug.Log("Auto Unmuted");
-    }
+    //    // Unmute
+    //    _is_muted = false;
+    //    ApplySoundState();
+    //    UpdateSoundButtonSprites();
+    //    Debug.Log("Auto Unmuted");
+    //}
 
 }

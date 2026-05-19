@@ -38,6 +38,7 @@ namespace supergoalkeeper
                 this.totalCollectedObjects++;
                 ps.Play();
 
+                other.gameObject.SetActive(false);
             }
             //else if (other.name.Contains("sgk_coin"))
             //{
