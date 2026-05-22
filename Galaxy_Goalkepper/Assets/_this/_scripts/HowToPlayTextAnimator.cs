@@ -17,7 +17,7 @@ public class HowToPlayTextAnimator : MonoBehaviour
 
     [Header("Typing")]
     [Tooltip("Characters revealed per second when typing.")]
-    public float typingCharactersPerSecond = 35f;
+    public float typingCharactersPerSecond = 40f;
 
     [Header("Fade")]
     [Tooltip("Seconds the fade-in takes.")]

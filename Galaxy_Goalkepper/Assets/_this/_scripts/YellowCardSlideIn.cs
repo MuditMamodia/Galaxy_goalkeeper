@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(RectTransform))]
 public class YellowCardSlideIn : MonoBehaviour
 {
-    [Tooltip("Pixels to start above the resting position. Positive value = starts higher.")]
+    [Tooltip("Pixels to start to the LEFT of the resting position. Positive value = starts further off-screen left.")]
     public float slideDistance = 1500f;
 
     [Tooltip("How long the slide takes, in seconds.")]
@@ -30,6 +30,11 @@ public class YellowCardSlideIn : MonoBehaviour
     {
         if (!restingCaptured) CaptureResting();
 
+        // Check object name. Null-guard floating_points.fp — its Awake/instance may not
+        // have run yet when the page first activates (script execution order race), and
+        // we don't want OnEnable to throw before the slide-in coroutine starts.
+       
+
         StopAllCoroutines();
         StartCoroutine(SlideRoutine());
     }
@@ -43,7 +48,7 @@ public class YellowCardSlideIn : MonoBehaviour
 
     private IEnumerator SlideRoutine()
     {
-        Vector2 startPosition = restingPosition + new Vector2(0f, Mathf.Abs(slideDistance));
+        Vector2 startPosition = restingPosition + new Vector2(-Mathf.Abs(slideDistance), 0f);
         rt.anchoredPosition = startPosition;
 
         float t = 0f;

@@ -28,6 +28,8 @@ public class DraggableBall : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Image ballImage;
 
     private Vector2 startAnchoredPosition;
+    public Vector2 HomeAnchoredPosition { get { return startAnchoredPosition; } }
+    public void SetHomeAnchoredPosition(Vector2 home) { startAnchoredPosition = home; }
     private Vector2 grabOffset;
     private float trailTimer = 0f;
 

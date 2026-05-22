@@ -74,6 +74,7 @@ public class transition_effects : MonoBehaviour
     public IEnumerator FootballSlideIn()
     {
         float t = 0f;
+        footballImage.raycastTarget = true;
 
         footballRect.anchoredPosition = leftPos.anchoredPosition;
 
@@ -108,7 +109,7 @@ public class transition_effects : MonoBehaviour
 
             yield return null;
         }
-
+        footballImage.raycastTarget = false;
         footballRect.anchoredPosition = rightPos.anchoredPosition;
     }
 

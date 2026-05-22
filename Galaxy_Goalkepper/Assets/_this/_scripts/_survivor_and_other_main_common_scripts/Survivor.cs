@@ -1,4 +1,4 @@
-
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,13 +116,20 @@ public class Survivor : MonoBehaviour
 
     internal List<float> _default_volumes = new();
 
+    /// <summary>
+    /// mudit cahnges for the muting and unmutting the bg music
+    /// </summary>
+    private Coroutine bgMuteCoroutine;
 
+    private float bg0OriginalVolume;
+    private float bg5OriginalVolume;
+    private bool bgMusicForcedMuted = false;
 
     private void OnEnable()
     {
         PlayBackgroundMusic();
     }
-    
+
 
     void Awake()
     {
@@ -158,7 +165,7 @@ public class Survivor : MonoBehaviour
             ApplySoundState();
             UpdateSoundButtonSprites();
 
-            
+
         }
         else
         {
@@ -198,10 +205,24 @@ public class Survivor : MonoBehaviour
         // Apply sound state
         ApplySoundState();
 
+        // If BG music is force muted,
+        // keep it muted no matter what
+        if (bgMusicForcedMuted)
+        {
+            if (_Audio_sources.Count > 0)
+            {
+                _Audio_sources[0].volume = 0f;
+            }
+
+            if (_Audio_sources.Count > 5)
+            {
+                _Audio_sources[5].volume = 0f;
+            }
+        }
+
         // Update button sprites
         UpdateSoundButtonSprites();
     }
-
 
     //mudit function added
     public void play_audio_by_index(int index)
@@ -231,7 +252,15 @@ public class Survivor : MonoBehaviour
             {
                 if (i < _default_audio_volumes.Count)
                 {
-                    _Audio_sources[i].volume = _default_audio_volumes[i];
+                    // If BG is force muted
+                    if (bgMusicForcedMuted && (i == 0 || i == 5))
+                    {
+                        _Audio_sources[i].volume = 0f;
+                    }
+                    else
+                    {
+                        _Audio_sources[i].volume = _default_audio_volumes[i];
+                    }
                 }
             }
         }
@@ -358,7 +387,7 @@ public class Survivor : MonoBehaviour
         bgm.volume = isCurrentlyMuted ? 0 : defaultBGMVolume;
     }
 
-   
+
 
     public void PlayBackgroundMusic()
     {
@@ -376,6 +405,88 @@ public class Survivor : MonoBehaviour
             bgm.Play();
             Debug.Log("BGM Started (Index 0)");
         }
+    }
+
+    public void changing_sound_smoothly(int sound_1, int sound_2)
+    {
+        
+        StartCoroutine(smoothsound_changer(sound_1, sound_2));
+    }
+    IEnumerator smoothsound_changer(int sound_1, int sound_2)
+    {
+        // Safety check
+        if (sound_1 < 0 || sound_1 >= _Audio_sources.Count ||
+            sound_2 < 0 || sound_2 >= _Audio_sources.Count)
+        {
+            yield break;
+        }
+
+        AudioSource oldSound = _Audio_sources[sound_1];
+        AudioSource newSound = _Audio_sources[sound_2];
+
+        // If muted → both sounds volume = 0
+        if (_is_muted)
+        {
+            oldSound.volume = 0f;
+            newSound.volume = 0f;
+
+            if (!newSound.isPlaying)
+            {
+                newSound.Play();
+            }
+
+            oldSound.Stop();
+
+            yield break;
+        }
+
+        // Store original volumes
+        float oldStartVolume = oldSound.volume;
+        float newTargetVolume = _default_audio_volumes[sound_2];
+
+        // Start new sound with 0 volume
+        newSound.volume = 0f;
+
+        // Play new sound if not already playing
+        if (!newSound.isPlaying)
+        {
+            newSound.Play();
+        }
+
+        float duration = 3f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            // If muted during transition
+            if (_is_muted)
+            {
+                oldSound.volume = 0f;
+                newSound.volume = 0f;
+
+                yield return null;
+                continue;
+            }
+
+            timer += Time.deltaTime;
+
+            float t = timer / duration;
+
+            // Fade out old sound
+            oldSound.volume = Mathf.Lerp(oldStartVolume, 0f, t);
+
+            // Fade in new sound
+            newSound.volume = Mathf.Lerp(0f, newTargetVolume, t);
+
+            yield return null;
+        }
+
+        // Final values
+        oldSound.volume = 0f;
+        newSound.volume = newTargetVolume;
+
+        // Stop old sound
+        oldSound.Stop();
     }
 
     //IEnumerator AutoMuteUnmute()
@@ -396,5 +507,84 @@ public class Survivor : MonoBehaviour
     //    UpdateSoundButtonSprites();
     //    Debug.Log("Auto Unmuted");
     //}
+    public void Mute_BG_Music_Smoothly()
+    {
+        bgMusicForcedMuted = true;
 
+        if (bgMuteCoroutine != null)
+        {
+            StopCoroutine(bgMuteCoroutine);
+        }
+
+        bgMuteCoroutine = StartCoroutine(MuteBGCoroutine());
+    }
+
+    IEnumerator MuteBGCoroutine()
+    {
+        AudioSource bg1 = _Audio_sources[0];
+        AudioSource bg2 = _Audio_sources[5];
+
+        // Save original volumes
+        bg0OriginalVolume = _default_audio_volumes[0];
+        bg5OriginalVolume = _default_audio_volumes[5];
+
+        float startVol1 = bg1.volume;
+        float startVol2 = bg2.volume;
+
+        float duration = 1.5f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / duration;
+
+            bg1.volume = Mathf.Lerp(startVol1, 0f, t);
+            bg2.volume = Mathf.Lerp(startVol2, 0f, t);
+
+            yield return null;
+        }
+
+        bg1.volume = 0f;
+        bg2.volume = 0f;
+    }
+    public void Restore_BG_Music_Smoothly()
+    {
+        bgMusicForcedMuted = false;
+
+        if (bgMuteCoroutine != null)
+        {
+            StopCoroutine(bgMuteCoroutine);
+        }
+
+        bgMuteCoroutine = StartCoroutine(RestoreBGCoroutine());
+    }
+
+    IEnumerator RestoreBGCoroutine()
+    {
+        AudioSource bg1 = _Audio_sources[0];
+        AudioSource bg2 = _Audio_sources[5];
+
+        float startVol1 = bg1.volume;
+        float startVol2 = bg2.volume;
+
+        float duration = 1.5f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / duration;
+
+            bg1.volume = Mathf.Lerp(startVol1, bg0OriginalVolume, t);
+            bg2.volume = Mathf.Lerp(startVol2, bg5OriginalVolume, t);
+
+            yield return null;
+        }
+
+        bg1.volume = bg0OriginalVolume;
+        bg2.volume = bg5OriginalVolume;
+    }
 }

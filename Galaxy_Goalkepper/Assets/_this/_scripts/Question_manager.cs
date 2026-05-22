@@ -39,37 +39,52 @@ public class Question_manager : MonoBehaviour
 
     private int currentQuestionIndex = -1;
 
-    // 🔥 Track used questions
-    [SerializeField] private List<int> usedQuestionIndexes = new List<int>();
+    // Latches true the moment an answer registers and is cleared by SetupQuestion when the
+    // next (or retried) question loads. Guards against double-tap / rapid spam so the same
+    // question never advances the game flow twice.
+    private bool answerLocked;
 
-    // 🔥 LOAD RANDOM (NO REPEAT)
+    // Fisher-Yates shuffled order. Every question appears exactly once per cycle;
+    // a new cycle reshuffles only when the previous one is exhausted.
+    [SerializeField] private List<int> shuffledQuestionOrder = new List<int>();
+    [SerializeField] private int shuffledQuestionCursor = 0;
+
     public void LoadRandomQuestion()
     {
-        if (questions.Length == 0)
+        if (questions == null || questions.Length == 0)
         {
             Debug.LogWarning("No questions assigned!");
             return;
         }
 
-        // If all questions used → reset
-        if (usedQuestionIndexes.Count >= questions.Length)
+        if (shuffledQuestionOrder.Count != questions.Length || shuffledQuestionCursor >= shuffledQuestionOrder.Count)
         {
-            usedQuestionIndexes.Clear();
+            ReshuffleQuestionOrder();
         }
 
-        int randomIndex;
+        int nextIndex = shuffledQuestionOrder[shuffledQuestionCursor];
+        shuffledQuestionCursor++;
 
-        // Pick unused question
-        do
+        currentQuestionIndex = nextIndex;
+        SetupQuestion(questions[nextIndex]);
+    }
+
+    // Fisher-Yates: walks i from last index down to 1, swapping arr[i] with arr[Random.Range(0, i+1)].
+    private void ReshuffleQuestionOrder()
+    {
+        shuffledQuestionOrder.Clear();
+        for (int i = 0; i < questions.Length; i++)
         {
-            randomIndex = Random.Range(0, questions.Length);
+            shuffledQuestionOrder.Add(i);
         }
-        while (usedQuestionIndexes.Contains(randomIndex));
-
-        usedQuestionIndexes.Add(randomIndex);
-        currentQuestionIndex = randomIndex;
-
-        SetupQuestion(questions[randomIndex]);
+        for (int i = shuffledQuestionOrder.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            int tmp = shuffledQuestionOrder[i];
+            shuffledQuestionOrder[i] = shuffledQuestionOrder[j];
+            shuffledQuestionOrder[j] = tmp;
+        }
+        shuffledQuestionCursor = 0;
     }
 
     // 🔁 REPEAT CURRENT QUESTION
@@ -90,6 +105,9 @@ public class Question_manager : MonoBehaviour
         currentQuestion = questionData;
         question_txt.text = currentQuestion.question;
         correctAnswer = currentQuestion.correctAnswer;
+
+        // New question — accept input again.
+        answerLocked = false;
 
         // Prepare answers
         List<string> allAnswers = new List<string>();
@@ -147,6 +165,11 @@ public class Question_manager : MonoBehaviour
     // 🔥 HANDLE CLICK
     private void OnAnswerClicked(string selectedAnswer)
     {
+        // Spam guard: ignore every tap after the first one for this question. Cleared by
+        // SetupQuestion the next time a question loads / is retried.
+        if (answerLocked) return;
+        answerLocked = true;
+
         if (selectedAnswer == correctAnswer)
         {
             Survivor._S.play_audio_by_index(3);
@@ -165,7 +188,7 @@ public class Question_manager : MonoBehaviour
             game_flow_loop.gamflow.wrong_option_page_opener();
         }
 
-        
+
         foreach (var whycorrect in why_correct_txt)
         {
             whycorrect.text = currentQuestion.whyCorrect;

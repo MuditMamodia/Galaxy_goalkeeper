@@ -12,6 +12,7 @@ public class game_flow_loop : MonoBehaviour
     public GameObject video_playing_window;
     public GameObject How_to_play_page;
     public GameObject Main_game_page;
+    public GameObject Leaderboard_page;
     //public GameObject finishing_of_game;
 
 
@@ -38,6 +39,9 @@ public class game_flow_loop : MonoBehaviour
     public MissionOne missionone;
     public VideoController vc;
     public game_score_manager gsm;
+
+    public floating_text fp;
+    //public RollingPaperOpen rpo;
 
 
 
@@ -67,12 +71,19 @@ public class game_flow_loop : MonoBehaviour
     public string game_string;
 
 
+    
+
+
     private void Awake()
     {
         if (gamflow == null)
         {
             gamflow = this;
         }
+
+        currentqurion_inex = 0;
+        incorrect_count = 0;
+        onetimeincorrect = false;
 
         Landing_page.SetActive(true);
         video_playing_window.SetActive(false);
@@ -128,6 +139,7 @@ public class game_flow_loop : MonoBehaviour
     {
         yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
         Landing_page.SetActive(false);
+        Survivor._S.Mute_BG_Music_Smoothly();
         videonumber = 2;
         vc.Play_video(videonumber);
         video_playing_window.SetActive(true);
@@ -145,6 +157,7 @@ public class game_flow_loop : MonoBehaviour
         yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
         videonumber = 3;
         Landing_page.SetActive(false);
+        Survivor._S.Mute_BG_Music_Smoothly();
         vc.Play_video(videonumber);
         video_playing_window.SetActive(true);
         How_to_play_page.SetActive(false);
@@ -160,6 +173,7 @@ public class game_flow_loop : MonoBehaviour
         yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
         
         Landing_page.SetActive(false);
+        Survivor._S.Mute_BG_Music_Smoothly();
         videonumber = 4;
         vc.Play_video(videonumber);
         video_playing_window.SetActive(true);
@@ -191,6 +205,7 @@ public class game_flow_loop : MonoBehaviour
     {
         yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
         Debug.Log("videopage");
+        Survivor._S.Mute_BG_Music_Smoothly();
         //game_level_counted+=1;
         Landing_page.SetActive(false);
         video_playing_window.SetActive(true);
@@ -261,6 +276,7 @@ public class game_flow_loop : MonoBehaviour
     {
         if (addingplay < 2 && how_to_answer_quections)
         {
+            Debug.Log("qq");
             video_playing_window.SetActive(false);
             if (currentqurion_inex == 0 && QnaCardTracker.instance != null)
             {
@@ -268,9 +284,11 @@ public class game_flow_loop : MonoBehaviour
             }
             quection_manager.LoadRandomQuestion();
             quection_page.SetActive(true);
+            Survivor._S.changing_sound_smoothly(0, 5);
         }
         else if (addingplay < 2 && !how_to_answer_quections)
         {
+            Debug.Log("qg");
             htp_text.text = qna_string;
             how_to_answer_quections = true;
             Landing_page.SetActive(false);
@@ -284,6 +302,7 @@ public class game_flow_loop : MonoBehaviour
         }
         else
         {
+            Debug.Log("qp");
             Landing_page.SetActive(false);
             video_playing_window.SetActive(false);
             How_to_play_page.SetActive(false);
@@ -307,41 +326,60 @@ public class game_flow_loop : MonoBehaviour
         int qIdx = currentqurion_inex;
         bool firstTry = !onetimeincorrect;
 
-        System.Action onCovered = () =>
+        currentqurion_inex++;
+
+        // Schedule the greencard -> Question_card dissolve before activating the page.
+        // The dissolve marks all bg variants at its end (matches the wrong-answer path
+        // that uses OutcomeCardDissolveScheduler). If the greencard / dissolve component
+        // is missing, the scheduler falls back to an immediate QnaCardTracker.Mark.
+        Color greenFinalColor = (QnaCardTracker.instance != null)
+            ? (firstTry ? QnaCardTracker.instance.correctFirstTryColor : QnaCardTracker.instance.correctSecondTryColor)
+            : (firstTry ? new Color(0.25f, 0.85f, 0.35f, 1f) : new Color(1f, 0.85f, 0.1f, 1f));
+
+        if (firstTry)
         {
-            currentqurion_inex++;
-            quection_page.SetActive(false);
-            correctpage.SetActive(true);
-
-            if (onetimeincorrect)
-            {
-                ballsapwn.totalBallsToSpawn += 1;
-                onetimeincorrect = false;
-                incorrect_count = 0;
-            }
-            else
-            {
-                ballsapwn.totalBallsToSpawn += 2;
-            }
-
-            if (QnaCardTracker.instance != null)
-            {
-                if (firstTry) QnaCardTracker.instance.MarkCorrectFirstTry(qIdx);
-                else QnaCardTracker.instance.MarkCorrectSecondTry(qIdx);
-            }
-        };
-
-        if (QnaFlashOverlay.instance != null)
-        {
-            yield return StartCoroutine(QnaFlashOverlay.instance.FlashGreen(onCovered));
+            GreenCardDissolveScheduler.ScheduleOrApply(correctpage, qIdx, greenFinalColor);
+            fp.ShowPerfectPoints();
         }
         else
         {
-            yield return StartCoroutine(transition_effects.instance.FadeOut());
-            onCovered();
-            yield return StartCoroutine(transition_effects.instance.FadeIn());
+            fp.ShowMediumPoints();
+            // Second-try correct: skip the GreenCardDissolve animation entirely. Paint
+            // the Question_card slot directly via Mark. The greencard alpha is dimmed
+            // to 53/255 below, AFTER correctpage.SetActive(true), so the dim survives
+            // OnEnable's ResetToRest (which otherwise restores the full-alpha rest).
+            if (QnaCardTracker.instance != null)
+                QnaCardTracker.instance.Mark(qIdx, greenFinalColor);
         }
+
+        correctpage.SetActive(true);
+
+        // Set greencard opacity: 100% (alpha 1.0) for first-try correct, 53% (alpha 0.53)
+        // for second-try. Done AFTER correctpage.SetActive(true) so OnEnable's ResetToRest
+        // — which restores the captured full-alpha rest color — has already fired and we
+        // are the last writer for this frame.
+        GreenCardDissolve gcdAlpha = correctpage.GetComponentInChildren<GreenCardDissolve>(true);
+        if (gcdAlpha != null && gcdAlpha.sourceCard != null)
+        {
+            if (!gcdAlpha.gameObject.activeSelf) gcdAlpha.gameObject.SetActive(true);
+            Color cc = gcdAlpha.sourceCard.color;
+            cc.a = firstTry ? 1.0f : 0.53f;
+            gcdAlpha.sourceCard.color = cc;
+        }
+
+        if (onetimeincorrect)
+        {
+            ballsapwn.totalBallsToSpawn += 1;
+            onetimeincorrect = false;
+            incorrect_count = 0;
+        }
+        else
+        {
+            ballsapwn.totalBallsToSpawn += 2;
+        }
+
         transition_effects.instance.IsBusy = false;
+        yield break;
     }
 
 
@@ -369,55 +407,41 @@ public class game_flow_loop : MonoBehaviour
     }
     IEnumerator transition_wrong_ans_page()
     {
-        System.Action onCovered = () =>
-        {
-            incorrect_count++;
-            quection_page.SetActive(false);
-            incorrect_page.SetActive(true);
-            onetimeincorrect = true;
-        };
+        incorrect_count++;
+        
+        // Queue the yellow_card -> Question_card dissolve before the page activates.
+        // Mark-yellow is applied at the end of the dissolve (or immediately if no dissolve component is present).
+        int qIdx = currentqurion_inex;
+        Color yellowFallback = (QnaCardTracker.instance != null)
+            ? QnaCardTracker.instance.correctSecondTryColor
+            : new Color(1f, 0.85f, 0.1f, 1f);
+        OutcomeCardDissolveScheduler.ScheduleOrApply(incorrect_page, qIdx, yellowFallback);
 
-        if (QnaFlashOverlay.instance != null)
-        {
-            yield return StartCoroutine(QnaFlashOverlay.instance.FlashYellow(onCovered));
-        }
-        else
-        {
-            yield return StartCoroutine(transition_effects.instance.FadeOut());
-            onCovered();
-            yield return StartCoroutine(transition_effects.instance.FadeIn());
-        }
+        incorrect_page.SetActive(true);
+        onetimeincorrect = true;
+
         transition_effects.instance.IsBusy = false;
+        yield break;
     }
 
     IEnumerator transition_wrong_ans_pagenspage_with_answer()
     {
         int qIdx = currentqurion_inex;
+        fp.ShowZeroPoints();
+        onetimeincorrect = false;
+        currentqurion_inex++;
 
-        System.Action onCovered = () =>
-        {
-            onetimeincorrect = false;
-            currentqurion_inex++;
-            quection_page.SetActive(false);
-            incorrect_with_corerctans_page.SetActive(true);
+        // Queue the Red_card -> Question_card dissolve before the page activates.
+        // Mark-red is applied at the end of the dissolve, or immediately as the fallback if Red_card has no card child.
+        Color redFallback = (QnaCardTracker.instance != null)
+            ? QnaCardTracker.instance.failedColor
+            : new Color(0.9f, 0.22f, 0.22f, 1f);
+        OutcomeCardDissolveScheduler.ScheduleOrApply(incorrect_with_corerctans_page, qIdx, redFallback);
 
-            if (QnaCardTracker.instance != null)
-            {
-                QnaCardTracker.instance.MarkFailed(qIdx);
-            }
-        };
+        incorrect_with_corerctans_page.SetActive(true);
 
-        if (QnaFlashOverlay.instance != null)
-        {
-            yield return StartCoroutine(QnaFlashOverlay.instance.FlashRed(onCovered));
-        }
-        else
-        {
-            yield return StartCoroutine(transition_effects.instance.FadeOut());
-            onCovered();
-            yield return StartCoroutine(transition_effects.instance.FadeIn());
-        }
         transition_effects.instance.IsBusy = false;
+        yield break;
     }
 
     public void retry_quection_or_play()
@@ -474,7 +498,7 @@ public class game_flow_loop : MonoBehaviour
         training_page.SetActive(false);
         quection_page.SetActive(false);
         if (gsm != null) gsm.ResetStats();
-
+        Survivor._S.changing_sound_smoothly(5, 0);
         yield return StartCoroutine(transition_effects.instance.FootballSlideOut());
         transition_effects.instance.IsBusy = false;
     }
@@ -526,9 +550,10 @@ public class game_flow_loop : MonoBehaviour
             Landing_page.SetActive(false);
             video_playing_window.SetActive(false);
             How_to_play_page.SetActive(false);
-           
+            Survivor._S.changing_sound_smoothly(0, 5);
+
             //complection_page.SetActive(false);
-           
+
         }
         yield return StartCoroutine(transition_effects.instance.FootballSlideOut());
         transition_effects.instance.IsBusy = false;
@@ -599,5 +624,32 @@ public class game_flow_loop : MonoBehaviour
     //    main_game_window.SetActive(true);
     //    //incorrect_with_corerctans_page.SetActive(false);
     //}
+
+    public void opening_of_leaderboard(GameObject page)
+    {
+        StartCoroutine(transition_opening_of_leaderboard(page));
+    }
+    IEnumerator transition_opening_of_leaderboard(GameObject page)
+    {
+        yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
+        page.SetActive(false);
+        Leaderboard_page.SetActive(true);
+        yield return StartCoroutine(transition_effects.instance.FootballSlideOut());
+        //rpo.PlayUnroll();
+    }
+    public void closing_of_leaderboard()
+    {
+        StartCoroutine(transition_closing_of_leaderboard());
+    }
+    IEnumerator transition_closing_of_leaderboard()
+    {
+        yield return StartCoroutine(transition_effects.instance.FootballSlideIn());
+        
+        Landing_page.SetActive(true);
+        Leaderboard_page.SetActive(false);
+        yield return StartCoroutine(transition_effects.instance.FootballSlideOut());
+    }
+
+
 
 }
